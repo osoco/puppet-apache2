@@ -1,7 +1,7 @@
 puppet-apache2
 ==============
 
-Puppet module to manage apache2, with hability to enable or disable virtualhosts and modules. Examples:
+Puppet module to manage apache2, with hability to enable or disable virtualhosts and modules. Currently, it only works in Debian family. Examples:
 
     class my_apache_conf {
 
