@@ -1,0 +1,3 @@
+        RewriteEngine On
+        RewriteRule ^<%= origin %>$ <%= destination %> [L,R=301]
+        RewriteRule ^<%= origin %>(.*) <%= destination %>/$1 [L,R=301]

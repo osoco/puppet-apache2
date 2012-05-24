@@ -1,0 +1,44 @@
+<VirtualHost *:80>
+        ServerName <%= virtualhost_name %>
+<% if (server_admin_mail != "") -%>
+        ServerAdmin <%= server_admin_mail %>
+<% end -%>
+<% if (document_root != "") -%>
+        DocumentRoot <%= document_root %>
+<% end -%>
+
+<% if (is_https) -%>
+        RewriteEngine On
+        RewriteRule ^/$ https://<%= virtualhost_name %> [L,R=301]
+<% if (rewrite_conds != "") -%>
+        <%= rewrite_conds %>
+<% end -%>
+<% rewrite_conds do |rewrite_cond| -%>
+        <%= rewrite_cond %>
+<% end -%>
+        RewriteRule ^/(.*) https://<%= virtualhost_name %>/$1 [L,R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+        ServerName <%= virtualhost_name %>
+        <% if (server_admin_mail != "") -%>ServerAdmin <%= server_admin_mail %><% end %>
+<% if (document_root != "") -%>
+        DocumentRoot <%= document_root %>
+<% end -%>
+
+        SSLEngine On
+        SSLCertificateFile <%=ssl_cert%>
+<% if (ssl_cert_key != "") -%>
+        SSLCertificateKeyFile <%=ssl_cert_key%>
+<% end -%>
+<% end -%>
+
+<% if (virtualhost_specifics != "") -%>
+<%= virtualhost_specifics %>
+<% end -%>
+
+        ErrorLog ${APACHE_LOG_DIR}/<%= virtualhost_name %>_error.log
+        LogLevel warn
+        CustomLog ${APACHE_LOG_DIR}/<%= virtualhost_name %>_access.log combined
+</VirtualHost>
+

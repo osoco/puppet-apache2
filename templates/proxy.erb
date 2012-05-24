@@ -1,0 +1,10 @@
+        <Proxy *>
+                Order deny,allow
+                Allow from all
+        </Proxy>
+        ProxyPreserveHost On
+<% bypass_locations.each do |bypass_location| -%>
+        ProxyPass <%= bypass_location %> !
+<% end -%>
+        ProxyPass <%= proxy_location %> <%= proxy_type %>://<%= backend_url %><%= proxy_location %>
+        ProxyPassReverse <%= proxy_location %> <%= proxy_type %>://<%= backend_url %><%= proxy_location %>
