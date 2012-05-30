@@ -1,4 +1,4 @@
-class apache2 ($version = "latest") {
+class apache2 ($version = "latest", $apache2_user = 'www-data') {
 
     package { "apache2":
         ensure => $version
