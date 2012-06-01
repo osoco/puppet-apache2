@@ -1,6 +1,6 @@
-class apache2 ($version = "latest", $apache2_user = 'www-data') {
+class apache2 ($version = "latest", $apache2_user = 'www-data', $package = 'apache2', $service = 'apache2') {
 
-    package { "apache2":
+    package { "$package":
         ensure => $version,
         notify => Exec['grant-home-access-to-apache2-user']
     }
@@ -11,7 +11,7 @@ class apache2 ($version = "latest", $apache2_user = 'www-data') {
        refreshonly => true
     }
 
-    service { "apache2":
+    service { "$service":
         ensure => running,
         hasstatus => true,
         hasrestart => true,
