@@ -1,4 +1,4 @@
-define apache2::module($modname) {
+define apache2::module($modname = "$name") {
 
     include apache2
 

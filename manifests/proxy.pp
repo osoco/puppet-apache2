@@ -11,6 +11,9 @@ define apache2::proxy($virtualhost_name, $server_admin_mail, $is_https = false, 
     apache2::virtualhost { "$virtualhost_name":
         virtualhost_name => "$virtualhost_name",
         server_admin_mail => "$server_admin_mail",
+        is_https => $is_https,
+        ssl_cert => "$ssl_cert", 
+        ssl_cert_key => "$ssl_cert_key",
         virtualhost_specifics => template("apache2/proxy.erb")
     }
 }
