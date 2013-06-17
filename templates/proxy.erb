@@ -2,9 +2,14 @@
                 Order deny,allow
                 Allow from all
         </Proxy>
+<% if preserve_host -%>
         ProxyPreserveHost On
+<% end -%>
 <% bypass_locations.each do |bypass_location| -%>
         ProxyPass <%= bypass_location %> !
 <% end -%>
         ProxyPass <%= proxy_location %> <%= proxy_type %>://<%= backend_url %><%= proxy_location %>
         ProxyPassReverse <%= proxy_location %> <%= proxy_type %>://<%= backend_url %><%= proxy_location %>
+<% unless proxy_requests -%>
+	ProxyRequests Off
+<% end -%>
