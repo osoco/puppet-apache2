@@ -13,3 +13,6 @@
 <% unless proxy_requests -%>
 	ProxyRequests Off
 <% end -%>
+<% if virtualhost_extensions != '' %>
+<%= virtualhost_extensions -%>
+<% end -%>

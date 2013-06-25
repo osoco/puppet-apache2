@@ -1,6 +1,6 @@
 define apache2::proxy($virtualhost_name, $server_admin_mail, $is_https = false, $ssl_cert = "", $ssl_cert_key = "", 
                       $backend_url, $proxy_location = "/", $proxy_type = "http", $preserve_host = true, 
-                      $proxy_requests = false, $bypass_locations = []) {
+                      $proxy_requests = false, $bypass_locations = [], $virtualhost_extensions = "") {
 
     $mod_name = "proxy_$proxy_type"
     if !defined(Apache2::Module["apache2-module-${mod_name}"]) {
